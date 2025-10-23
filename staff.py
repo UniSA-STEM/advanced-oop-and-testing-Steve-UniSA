@@ -7,6 +7,7 @@ Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
+
 class Staff:
     def __init__(self, role, environmental_type, cleanliness_level):
         self.__role = role

@@ -7,6 +7,7 @@ Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
+
 class Animal:
     def __init__(self, name, species, age, dietary_requirements):
         self.__name = name
@@ -14,7 +15,7 @@ class Animal:
         self.__age = age
         self.__dietary_requirements = dietary_requirements
 
-    def speak(self):
+    def make_sound(self):
         pass
 
     def eat(self):
@@ -25,15 +26,3 @@ class Animal:
 
     def __str__(self):
         print(f"Name: {self.__name}")
-
-class Mammal(Animal):
-    def __init__(self, name, species, age, dietary_requirements):
-        super().__init__(name, species, age, dietary_requirements)
-
-class Reptile(Animal):
-    def __init__(self, name, species, age, dietary_requirements):
-        super().__init__(name, species, age, dietary_requirements)
-
-class Bird(Animal):
-    def __init__(self, name, species, age, dietary_requirements):
-        super().__init__(name, species, age, dietary_requirements)
