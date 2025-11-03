@@ -9,7 +9,8 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 
 
 class Staff:
-    def __init__(self, role, environmental_type, cleanliness_level):
+    def __init__(self, name, role, environmental_type, cleanliness_level):
+        self.__name = name
         self.__role = role
         self.__environmental_type = environmental_type
         self.__cleanliness_level = cleanliness_level

@@ -10,10 +10,10 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 
 class Animal:
     def __init__(self, name, species, age, dietary_requirements):
-        self.__name = name
-        self.__species = species
-        self.__age = age
-        self.__dietary_requirements = dietary_requirements
+        self._name = name
+        self._species = species
+        self._age = age
+        self._dietary_requirements = dietary_requirements
 
     def make_sound(self):
         pass
@@ -25,4 +25,4 @@ class Animal:
         pass
 
     def __str__(self):
-        print(f"Name: {self.__name}")
+        print(f"Name: {self._name}")
