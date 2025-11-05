@@ -15,15 +15,6 @@ class Animal:
         self._age = age
         self._dietary_requirements = dietary_requirements
 
-    def make_sound(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
-
     def get_name(self):
         return self._name
 
@@ -48,8 +39,17 @@ class Animal:
     def set_dietary_requirements(self, dietary_requirements):
         self._dietary_requirements = dietary_requirements
 
+    def make_sound(self):
+        pass
+
+    def eat(self):
+        pass
+
+    def sleep(self):
+        pass
+
     def __str__(self):
-        print(f"Name: {self._name}")
+        return f"Name: {self._name} Species: {self._species}"
 
     name = property(get_name, set_name)
     species = property(get_species, set_species)
