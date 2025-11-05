@@ -7,7 +7,7 @@ Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 from animal import Animal
-
+from enclosure import Enclosure
 
 class Staff:
     def __init__(self, name, role):
@@ -46,33 +46,41 @@ class Staff:
     def remove_assigned_animals(self, animal):
         self.__assigned_animals.remove(animal)
 
-    def feed_animal(self, animal: Animal):
-        if self.__duties.__contains__("feed animal"):
-            if self.__assigned_animals.__contains__(animal):
-                # Feed the animal
-                pass
-        else:
-            raise Exception(f"Sorry, your role is not assigned to feed {animal.name}")
-
-    def clean_enclosure(self, animal: Animal):
-        if self.__duties.__contains__("clean enclosure"):
-            if self.__assigned_animals.__contains__(animal):
-                # Clean the enclosure
-                pass
-        else:
-            raise Exception(f"Sorry, your role is not assigned to clean enclosures for {animal.name}")
-
-    def conduct_health_check(self, animal: Animal):
-        if self.__duties.__contains__("conduct health check"):
-            if self.__assigned_animals.__contains__(animal):
-                # Conduct the health check
-                pass
-        else:
-            raise Exception(f"Sorry, your role is not assigned to conduct health checks for {animal.name}")
-
     def __str__(self):
         return f"Name: {self.__name}\nRole: {self.__role}\nDuties: {self.__duties}"
 
     name = property(__get_name, __set_name)
     role = property(__get_role, __set_role)
     duties = property(__get_duties)
+
+class Zookeeper(Staff):
+    def feed_animal(self, animal: Animal):
+        if self.__duties.__contains__("feed animal"):
+            if self.__assigned_animals.__contains__(animal):
+                # Feed the animal
+                pass
+            else:
+                raise Exception(f"Sorry, you are not assigned to {animal.name}")
+        else:
+            raise Exception(f"Sorry, your role is not assigned to feed {animal.name}")
+
+    def clean_enclosure(self, enclosure: Enclosure):
+        if self.__duties.__contains__("clean enclosure"):
+            if self.__assigned_animals.__contains__(enclosure):
+                # Clean the enclosure
+                enclosure.clean_enclosure()
+            else:
+                raise Exception(f"Sorry, you are not assigned to {enclosure.name}")
+        else:
+            raise Exception(f"Sorry, your role is not assigned to clean {enclosure.name}")
+
+class Veterinarian(Staff):
+    def conduct_health_check(self, animal: Animal):
+        if self.__duties.__contains__("conduct health check"):
+            if self.__assigned_animals.__contains__(animal):
+                # Conduct the health check
+                return f"Health check performed on {animal.name}."
+            else:
+                raise Exception(f"Sorry, you are not assigned to {animal.name}")
+        else:
+            raise Exception(f"Sorry, your role is not assigned to conduct health checks for {animal.name}")

@@ -16,3 +16,6 @@ class Enclosure:
 
     def status(self):
         return self.__cleanliness_level
+
+    def clean_enclosure(self):
+        pass
