@@ -26,3 +26,18 @@ class Animal:
 
     def __str__(self):
         print(f"Name: {self._name}")
+
+
+class Bird(Animal):
+    def __init__(self, name, species, age, dietary_requirements):
+        super().__init__(name, species, age, dietary_requirements)
+
+
+class Mammal(Animal):
+    def __init__(self, name, species, age, dietary_requirements):
+        super().__init__(name, species, age, dietary_requirements)
+
+
+class Reptile(Animal):
+    def __init__(self, name, species, age, dietary_requirements):
+        super().__init__(name, species, age, dietary_requirements)
