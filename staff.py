@@ -100,7 +100,7 @@ class Staff:
 
     def __str__(self):
         """
-
+        The string conversion method returns the staff member's name, role and duties.
         :return:
         """
         return f"Name: {self.__name}\nRole: {self.__role}\nDuties: {self.__duties}"
@@ -123,7 +123,7 @@ class Zookeeper(Staff):
 
     def feed_animal(self, animal: Animal) -> None:
         """
-
+        This method records that an animal has been fed.
         :param animal:
         :return:
         """
@@ -138,7 +138,7 @@ class Zookeeper(Staff):
 
     def clean_enclosure(self, enclosure: Enclosure) -> None:
         """
-
+        This method records that an enclosure has been cleaned.
         :param enclosure:
         :return:
         """
@@ -164,7 +164,7 @@ class Veterinarian(Staff):
 
     def conduct_health_check(self, animal: Animal) -> None:
         """
-
+        This method records that a health check has been conducted on the animal.
         :param animal:
         :return:
         """

@@ -111,7 +111,7 @@ class Animal(ABC):
 
     def __str__(self):
         """
-
+        The string conversion method returns the animal name and species.
         :return:
         """
         return f"Name: {self._name} Species: {self._species}"

@@ -24,35 +24,35 @@ class Enclosure:
 
     def __get_size(self) -> int:
         """
-
+        This method returns the size of the enclosure
         :return:
         """
         return self.__size
 
     def __get_environment(self) -> str:
         """
-
+        This method returns the environment type of the enclosure.
         :return:
         """
         return self.__environment
 
     def __get_cleanliness(self) -> str:
         """
-
+        This method returns the cleanliness of the enclosure.
         :return:
         """
         return self.__cleanliness
 
     def __get_animals(self):
         """
-
+        This method returns the list animals in the enclosure.
         :return:
         """
         return self.__animals
 
     def __set_size(self, size) -> None:
         """
-
+        This method updates the size of the enclosure.
         :param size:
         :return:
         """
@@ -60,7 +60,7 @@ class Enclosure:
 
     def __set_environment(self, environment: str) -> None:
         """
-
+        This method updates the environment type of the enclosure.
         :param environment:
         :return:
         """
@@ -68,7 +68,7 @@ class Enclosure:
 
     def __set_cleanliness(self, cleanliness: str) -> None:
         """
-
+        This method updates the cleanliness of the enclosure.
         :param cleanliness:
         :return:
         """
@@ -76,7 +76,7 @@ class Enclosure:
 
     def add_animal(self, animal: Animal) -> None:
         """
-
+        This method adds animals to the enclosure.
         :param animal:
         :return:
         """
@@ -88,7 +88,7 @@ class Enclosure:
 
     def remove_animal(self, animal) -> None:
         """
-
+        This method removes animals from the enclosure.
         :param animal:
         :return:
         """
@@ -97,14 +97,14 @@ class Enclosure:
 
     def status(self) -> str:
         """
-
+        This method returns the status of the enclosure.
         :return:
         """
         self.__get_cleanliness()
 
     def clean_enclosure(self) -> None:
         """
-
+        This method records a cleaning of the enclosure.
         :return:
         """
         # TODO: Implement clean_enclosure.
@@ -112,7 +112,8 @@ class Enclosure:
 
     def is_compatible(self, animal) -> bool:
         """
-
+        This method checks whether the enclosure is compatible with the animal we would like to
+        assign to the environment.
         :param animal:
         :return:
         """
@@ -121,10 +122,10 @@ class Enclosure:
 
     def __str__(self):
         """
-
+        The string conversion method returns the enclosure environment.
         :return:
         """
-        return f""
+        return f"Name: {self.__environment}"
 
     # Properties
     size = property(__get_size, __set_size)
