@@ -46,3 +46,6 @@ if __name__ == '__main__':
 
     for animal in zoo_animals:
         print(animal)
+        print(animal.make_sound())
+        print(animal.sleep())
+        print(animal.eat())
