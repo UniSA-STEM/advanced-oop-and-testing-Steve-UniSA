@@ -1,6 +1,6 @@
 """
 File: main.py
-Description: <A brief description of this Python module.>
+Description: This file contains the main application code for the project.
 Author: Stephen Corns
 ID: 110457922
 Username: CORSY034

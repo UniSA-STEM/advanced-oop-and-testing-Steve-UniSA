@@ -1,6 +1,6 @@
 """
 File: enclosure.py
-Description: <A brief description of this Python module.>
+Description: This file contains the Enclosure class.
 Author: Stephen Corns
 ID: 110457922
 Username: CORSY034

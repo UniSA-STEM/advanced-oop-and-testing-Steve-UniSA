@@ -1,6 +1,6 @@
 """
 File: staff.py
-Description: <A brief description of this Python module.>
+Description: This file contains the Staff class and its subclasses.
 Author: Stephen Corns
 ID: 110457922
 Username: CORSY034
