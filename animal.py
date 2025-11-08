@@ -10,6 +10,9 @@ from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
+    _last_animal_id: int = 0
+    DIET_OPTIONS = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
+
     def __init__(self, name: str, species: str, age: int, diet: str) -> None:
         """
         This class represents a universal animal. Animals have a name, species, age and diet.
@@ -18,10 +21,20 @@ class Animal(ABC):
         :param age:
         :param diet:
         """
+        self._animal_id: int = Animal._last_animal_id + 1
+        Animal._last_animal_id += 1
         self._name: str = name
         self._species: str = species
         self._age: int = age
         self._diet: str = diet
+        self._needs_sleep: bool = False
+
+    def __get_id(self) -> int:
+        """
+        This method returns the name of the animal.
+        :return name:
+        """
+        return self._animal_id
 
     def __get_name(self) -> str:
         """
@@ -58,7 +71,12 @@ class Animal(ABC):
         :return:
         """
         if isinstance(name, str):
-            self._name = name
+            if name.isalpha():
+                self._name = name
+            else:
+                raise ValueError("The name must be a string using only alphabetical characters.")
+        else:
+            raise TypeError("The name must be a string.")
 
     def __set_species(self, species) -> None:
         """
@@ -67,7 +85,12 @@ class Animal(ABC):
         :return:
         """
         if isinstance(species, str):
-            self._species = species
+            if species.isalpha():
+                self._species = species
+            else:
+                raise ValueError("The name must be a string using only alphabetical characters.")
+        else:
+            raise TypeError("The name must be a string.")
 
     def __set_age(self, age) -> None:
         """
@@ -75,16 +98,27 @@ class Animal(ABC):
         :param age:
         :return:
         """
-        if isinstance(age, int) & age > 0:
-            self._age = age
+        if isinstance(age, int):
+            if age > 0:
+                self._age = age
+            else:
+                raise ValueError("The age must be a positive integer.")
+        else:
+            raise TypeError("The age must be a positive integer.")
 
-    def __set_diet(self, diet) -> None:
+    def __set_diet(self, diet: str) -> None:
         """
         This method updates the diet of the animal.
         :param diet:
         :return:
         """
-        self._diet = diet
+        if isinstance(diet, str):
+            if diet.isalpha():
+                self._diet = diet
+            else:
+                raise ValueError("The name must be a string using only alphabetical characters.")
+        else:
+            raise TypeError("The name must be a string.")
 
     @abstractmethod
     def make_sound(self):
@@ -99,14 +133,14 @@ class Animal(ABC):
         This method allows the system to record that the animal has eaten.
         :return:
         """
-        diet_options = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
-        return f"{self._name} is a {self._diet.lower()} and eats {diet_options[self._diet]}."
+        return f"{self._name} is a {self._diet.lower()} and eats {Animal.DIET_OPTIONS[self._diet]}."
 
     def sleep(self):
         """
         This method allows the system to record that the animal has slept.
         :return:
         """
+        self._needs_sleep = False
         return f"{self._name} is sleeping."
 
     def __str__(self):
@@ -117,6 +151,7 @@ class Animal(ABC):
         return f"Name: {self._name} Species: {self._species}"
 
     # Properties
+    id = property(__get_id)
     name = property(__get_name, __set_name)
     species = property(__get_species, __set_species)
     age = property(__get_age, __set_age)
