@@ -10,8 +10,13 @@ from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
+    # Track the highest animal ID
     _last_animal_id: int = 0
+    # List of diet types
     DIET_OPTIONS = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
+    # List of animals kept at this zoo
+    zoo_animals = {"Flamingo", "Macaw", "Penguin", "Lion", "Elephant", "Koala", "Sloth", "Komodo Dragon",
+                   "Green Iguana", "King Cobra"}
 
     def __init__(self, name: str, species: str, age: int, diet: str) -> None:
         """
@@ -21,50 +26,58 @@ class Animal(ABC):
         :param age:
         :param diet:
         """
+        self._set_name(name)
+        self._set_species(species)
+        self._set_age(age)
+        self._set_diet(diet)
+        self._needs_feeding: bool = False
+        self._sleeping: bool = False
         self._animal_id: int = Animal._last_animal_id + 1
         Animal._last_animal_id += 1
-        self._name: str = name
-        self._species: str = species
-        self._age: int = age
-        self._diet: str = diet
-        self._needs_sleep: bool = False
 
-    def __get_id(self) -> int:
+    def _get_id(self) -> int:
         """
-        This method returns the name of the animal.
-        :return name:
+        This method returns the id of the animal.
+        :return id:
         """
         return self._animal_id
 
-    def __get_name(self) -> str:
+    def _get_name(self) -> str:
         """
         This method returns the name of the animal.
         :return name:
         """
         return self._name
 
-    def __get_species(self) -> str:
+    def _get_species(self) -> str:
         """
         This method returns the species of the animal.
-        :return:
+        :return species:
         """
         return self._species
 
-    def __get_age(self) -> int:
+    def _get_age(self) -> int:
         """
         This method returns the age of the animal.
-        :return:
+        :return age:
         """
         return self._age
 
-    def __get_diet(self) -> str:
+    def _get_diet(self) -> str:
         """
         This method returns the diet of the animal.
-        :return:
+        :return diet:
         """
         return self._diet
 
-    def __set_name(self, name) -> None:
+    def _get_sleeping(self) -> bool:
+        """
+        This method returns the sleeping state of the animal.
+        :return sleeping state:
+        """
+        return self._sleeping
+
+    def _set_name(self, name) -> None:
         """
         This method updates the name of the animal.
         :param name:
@@ -78,21 +91,18 @@ class Animal(ABC):
         else:
             raise TypeError("The name must be a string.")
 
-    def __set_species(self, species) -> None:
+    def _set_species(self, species) -> None:
         """
         This method updates the species of the animal.
         :param species:
         :return:
         """
-        if isinstance(species, str):
-            if species.isalpha():
-                self._species = species
-            else:
-                raise ValueError("The name must be a string using only alphabetical characters.")
+        if species in self.zoo_animals:
+            self._species = species
         else:
-            raise TypeError("The name must be a string.")
+            raise ValueError("The species must one of the animal species kept at the zoo.")
 
-    def __set_age(self, age) -> None:
+    def _set_age(self, age) -> None:
         """
         This method updates the age of the animal.
         :param age:
@@ -102,11 +112,11 @@ class Animal(ABC):
             if age > 0:
                 self._age = age
             else:
-                raise ValueError("The age must be a positive integer.")
+                raise ValueError("The age must be a positive integer value.")
         else:
-            raise TypeError("The age must be a positive integer.")
+            raise TypeError("The age must be an integer value.")
 
-    def __set_diet(self, diet: str) -> None:
+    def _set_diet(self, diet: str) -> None:
         """
         This method updates the diet of the animal.
         :param diet:
@@ -119,6 +129,14 @@ class Animal(ABC):
                 raise ValueError("The name must be a string using only alphabetical characters.")
         else:
             raise TypeError("The name must be a string.")
+
+    def _set_needs_feeding(self) -> None:
+        """
+        This method marks the animal as requiring feeding.
+        :param:
+        :return:
+        """
+        self._needs_feeding = True
 
     @abstractmethod
     def make_sound(self):
@@ -133,29 +151,42 @@ class Animal(ABC):
         This method allows the system to record that the animal has eaten.
         :return:
         """
-        return f"{self._name} is a {self._diet.lower()} and eats {Animal.DIET_OPTIONS[self._diet]}."
+        if self._needs_feeding:
+            self._needs_feeding = False
+            return f"{self._name} is a {self._diet.lower()} and eats {Animal.DIET_OPTIONS[self._diet]}."
+        else:
+            return f"{self._name} does not require feeding at the moment."
 
     def sleep(self):
         """
         This method allows the system to record that the animal has slept.
         :return:
         """
-        self._needs_sleep = False
+        self._sleeping = True
         return f"{self._name} is sleeping."
+
+    def awake(self):
+        """
+        This method allows the system to record that the animal has slept.
+        :return:
+        """
+        self._sleeping = False
+        return f"{self._name} is awake."
 
     def __str__(self):
         """
         The string conversion method returns the animal name and species.
         :return:
         """
-        return f"Name: {self._name} Species: {self._species}"
+        return f"Id: {self._animal_id} Name: {self._name} Species: {self._species}"
 
     # Properties
-    id = property(__get_id)
-    name = property(__get_name, __set_name)
-    species = property(__get_species, __set_species)
-    age = property(__get_age, __set_age)
-    diet = property(__get_diet, __set_diet)
+    id = property(_get_id)
+    name = property(_get_name, _set_name)
+    species = property(_get_species, _set_species)
+    age = property(_get_age, _set_age)
+    diet = property(_get_diet, _set_diet)
+    sleeping = property(_get_sleeping)
 
 
 class Bird(Animal):

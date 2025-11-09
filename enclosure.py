@@ -10,17 +10,25 @@ from animal import Animal, Bird, Mammal, Reptile
 
 
 class Enclosure:
-    def __init__(self, size: int, environment: str, cleanliness: str) -> None:
+    def __init__(self, name: str, size: int, environment: str, cleanliness: str) -> None:
         """
         This class represents an enclosure. Enclosures have a size and environment.
         :param size:
         :param environment:
         :param cleanliness:
         """
+        self.__name = name
         self.__size = size
         self.__environment = environment
         self.__cleanliness = cleanliness
         self.__animals = []
+
+    def __get_name(self) -> str:
+        """
+        This method returns the name of the enclosure
+        :return:
+        """
+        return self.__name
 
     def __get_size(self) -> int:
         """
@@ -49,6 +57,14 @@ class Enclosure:
         :return:
         """
         return self.__animals
+
+    def __set_name(self, name) -> None:
+        """
+        This method updates the name of the enclosure.
+        :param name:
+        :return:
+        """
+        self.__name = name
 
     def __set_size(self, size) -> None:
         """
@@ -128,6 +144,7 @@ class Enclosure:
         return f"Name: {self.__environment}"
 
     # Properties
+    name = property(__get_name, __set_name)
     size = property(__get_size, __set_size)
     environment = property(__get_environment, __set_environment)
     cleanliness = property(__get_cleanliness, __set_cleanliness)

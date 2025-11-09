@@ -6,173 +6,135 @@ ID: 110457922
 Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from abc import ABC, abstractmethod
+from typing import List
 from animal import Animal
 from enclosure import Enclosure
 
 
-class Staff:
-    def __init__(self, name, role) -> None:
+class Staff(ABC):
+    _last_staff_id: int = 0
+
+    def __init__(self, name) -> None:
         """
         This class represents the universal staff of the zoo. Staff have a name, role, and duties.
         :param name:
-        :param role:
         """
-        self.__name = name
-        self.__role = role
-        self.__duties = []
-        self.__assigned_animals = []
+        self._staff_id: int = Staff._last_staff_id + 1
+        Staff._last_staff_id += 1
+        self._set_name(name)
+        self._assigned_animals = []
 
-    def __get_name(self):
+    def _get_id(self) -> int:
+        """
+        This method returns the id of the staff member.
+        :return: integer
+        """
+        return self._staff_id
+
+    def _get_name(self) -> str:
         """
         This method returns the name of the staff member.
-        :return:
+        :return: string
         """
-        return self.__name
+        return self._name
 
-    def __get_role(self):
-        """
-        This method returns the role of the staff member.
-        :return:
-        """
-        return self.__role
-
-    def __get_duties(self):
-        """
-        This method returns the duties of the staff member.
-        :return:
-        """
-        return self.__duties
-
-    def get_assigned_animals(self):
+    def _get_assigned_animals(self) -> List[Animal]:
         """
         This method returns the assigned animals for the staff member.
-        :return:
+        :return: List[Animal]
         """
-        return self.__assigned_animals
+        return self._assigned_animals
 
-    def __set_name(self, name) -> None:
+    def _set_name(self, name) -> None:
         """
         This method updates the name of the staff member.
         :param name:
-        :return:
+        :return: None
         """
         self.__name = name
-
-    def __set_role(self, role) -> None:
-        """
-        This method updates the role of the staff member.
-        :param role:
-        :return:
-        """
-        self.__role = role
-
-    def add_duties(self, duty) -> None:
-        """
-        This method adds the duties to the staff member.
-        :param duty:
-        :return:
-        """
-        self.__duties.append(duty)
-
-    def remove_duties(self, duty) -> None:
-        """
-        This method removes the duties from the staff member.
-        :param duty:
-        :return:
-        """
-        self.__duties.remove(duty)
 
     def add_assigned_animals(self, animal) -> None:
         """
         This method assigns animals to the staff member.
         :param animal:
-        :return:
+        :return: None
         """
-        self.__assigned_animals.append(animal)
+        self._assigned_animals.append(animal)
 
     def remove_assigned_animals(self, animal) -> None:
         """
         This method removes animals from the staff member.
         :param animal:
-        :return:
+        :return: None
         """
-        self.__assigned_animals.remove(animal)
+        self._assigned_animals.remove(animal)
 
     def __str__(self):
         """
         The string conversion method returns the staff member's name, role and duties.
-        :return:
+        :return: None
         """
-        return f"Name: {self.__name}\nRole: {self.__role}\nDuties: {self.__duties}"
+        return f"Id: {self._staff_id} Name: {self._name} Role: {type(self).__name__}"
 
     # Properties
-    name = property(__get_name, __set_name)
-    role = property(__get_role, __set_role)
-    duties = property(__get_duties)
+    id = property(_get_id)
+    name = property(_get_name, _set_name)
+    assigned_animals = property(_get_assigned_animals)
 
 
 class Zookeeper(Staff):
     """
     This class represents the zookeeper staff of the zoo. Staff have a name, role, and duties.
     :param name:
-    :param role:
     """
 
-    def __init__(self, name, role):
-        super().__init__(name, role)
+    def __init__(self, name):
+        super().__init__(name)
 
-    def feed_animal(self, animal: Animal) -> None:
+    def feed_animal(self, animal: Animal) -> str:
         """
         This method records that an animal has been fed.
         :param animal:
-        :return:
+        :return: string
         """
-        if self.__duties.__contains__("feed animal"):
-            if self.__assigned_animals.__contains__(animal):
-                # Feed the animal
-                pass
-            else:
-                raise Exception(f"Sorry, you are not assigned to {animal.name}")
+        if self._assigned_animals.__contains__(animal):
+            # Feed the animal
+            return f"{animal.name} has been fed."
         else:
-            raise Exception(f"Sorry, your role is not assigned to feed {animal.name}")
+            return f"Sorry, you are not assigned to {animal.name}"
 
-    def clean_enclosure(self, enclosure: Enclosure) -> None:
+    def clean_enclosure(self, enclosure: Enclosure) -> str:
         """
         This method records that an enclosure has been cleaned.
         :param enclosure:
-        :return:
+        :return: string
         """
-        if self.__duties.__contains__("clean enclosure"):
-            if self.__assigned_animals.__contains__(enclosure):
-                # Clean the enclosure
-                enclosure.clean_enclosure()
-            else:
-                raise Exception(f"Sorry, you are not assigned to {enclosure.name}")
+        if self._assigned_animals.__contains__(enclosure):
+            # Clean the enclosure
+            enclosure.clean_enclosure()
+            return f"Enclosure cleaned."
         else:
-            raise Exception(f"Sorry, your role is not assigned to clean {enclosure.name}")
+            return f"Sorry, you are not assigned to {enclosure.name}"
 
 
 class Veterinarian(Staff):
     """
     This class represents the veterinarian staff of the zoo. Staff have a name, role, and duties.
     :param name:
-    :param role:
     """
 
-    def __init__(self, name, role):
-        super().__init__(name, role)
+    def __init__(self, name):
+        super().__init__(name)
 
-    def conduct_health_check(self, animal: Animal) -> None:
+    def conduct_health_check(self, animal: Animal) -> str:
         """
         This method records that a health check has been conducted on the animal.
         :param animal:
-        :return:
+        :return: string
         """
-        if self.__duties.__contains__("conduct health check"):
-            if self.__assigned_animals.__contains__(animal):
-                # Conduct the health check
-                return f"Health check performed on {animal.name}."
-            else:
-                raise Exception(f"Sorry, you are not assigned to {animal.name}")
+        if self._assigned_animals.__contains__(animal):
+            # Conduct the health check
+            return f"Health check performed on {animal.name}."
         else:
-            raise Exception(f"Sorry, your role is not assigned to conduct health checks for {animal.name}")
+            return f"Sorry, you are not assigned to {animal.name}"
