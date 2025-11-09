@@ -15,8 +15,11 @@ class Animal(ABC):
     # List of diet types
     DIET_OPTIONS = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
     # List of animals kept at this zoo
-    zoo_animals = {"Flamingo", "Macaw", "Penguin", "Lion", "Elephant", "Koala", "Sloth", "Komodo Dragon",
-                   "Green Iguana", "King Cobra"}
+    # Stored as <Name>:[<Enclosure size>, <Enclosure environment>]
+    ZOO_ANIMALS = {"Flamingo": ["Small", "Wetlands"], "Macaw": ["Small", "Rainforest"], "Penguin": ["Small", "Arctic"],
+                   "Lion": ["Large", "Savannah"], "Elephant": ["Large", "Savannah"], "Koala": ["Medium", "Temperate Forest"],
+                   "Sloth": ["Medium", "Temperate Forest"], "Komodo Dragon": ["Medium", "Rainforest"],
+                   "Green Iguana": ["Medium", "Rainforest"], "King Cobra": ["Medium", "Rainforest"]}
 
     def __init__(self, name: str, species: str, age: int, diet: str) -> None:
         """
@@ -35,7 +38,7 @@ class Animal(ABC):
         self._animal_id: int = Animal._last_animal_id + 1
         Animal._last_animal_id += 1
 
-    def _get_id(self) -> int:
+    def _get_animal_id(self) -> int:
         """
         This method returns the id of the animal.
         :return id:
@@ -97,7 +100,7 @@ class Animal(ABC):
         :param species:
         :return:
         """
-        if species in self.zoo_animals:
+        if species in Animal.ZOO_ANIMALS:
             self._species = species
         else:
             raise ValueError("The species must one of the animal species kept at the zoo.")
@@ -181,7 +184,7 @@ class Animal(ABC):
         return f"Id: {self._animal_id} Name: {self._name} Species: {self._species}"
 
     # Properties
-    id = property(_get_id)
+    id = property(_get_animal_id)
     name = property(_get_name, _set_name)
     species = property(_get_species, _set_species)
     age = property(_get_age, _set_age)

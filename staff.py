@@ -25,7 +25,7 @@ class Staff(ABC):
         self._set_name(name)
         self._assigned_animals = []
 
-    def _get_id(self) -> int:
+    def _get_staff_id(self) -> int:
         """
         This method returns the id of the staff member.
         :return: integer
@@ -52,7 +52,7 @@ class Staff(ABC):
         :param name:
         :return: None
         """
-        self.__name = name
+        self._name = name
 
     def add_assigned_animals(self, animal) -> None:
         """
@@ -78,7 +78,7 @@ class Staff(ABC):
         return f"Id: {self._staff_id} Name: {self._name} Role: {type(self).__name__}"
 
     # Properties
-    id = property(_get_id)
+    id = property(_get_staff_id)
     name = property(_get_name, _set_name)
     assigned_animals = property(_get_assigned_animals)
 

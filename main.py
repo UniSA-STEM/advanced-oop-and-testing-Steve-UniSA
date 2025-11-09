@@ -62,6 +62,14 @@ if __name__ == '__main__':
     zookeeper_george = Zookeeper("George")
     veterinarian_steve = Veterinarian("Steve")
 
+    # Create enclosures
+    savannah1 = Enclosure("savannah1", "Large", "Savannah", 10)
+    savannah2 = Enclosure("savannah2", "Large", "Savannah", 10)
+    rainforest1 = Enclosure("rainforest1", "Large", "Rainforest", 10)
+    rainforest2 = Enclosure("rainforest2", "Large", "Rainforest", 10)
+    temperate_forest1 = Enclosure("temperate_forest1", "Large", "Temperate Forest", 10)
+    temperate_forest2 = Enclosure("temperate_forest2", "Large", "Temperate Forest", 10)
+
     zoo_animals = []
     create_zoo()
 
@@ -90,5 +98,6 @@ if __name__ == '__main__':
         if animal.id == 7:
             print(f"\n{zookeeper_fred.feed_animal(animal)}")
             print(f"\n{zookeeper_george.feed_animal(animal)}")
-        if animal.id == 8:
-            print(f"\n{animal.sleep()}")
+        if animal.id == 4:
+            print(f"\n{savannah1.is_compatible(animal)}")
+

@@ -10,18 +10,33 @@ from animal import Animal, Bird, Mammal, Reptile
 
 
 class Enclosure:
-    def __init__(self, name: str, size: int, environment: str, cleanliness: str) -> None:
+    _last_enclosure_id: int = 0
+    ENCLOSURE_SIZE = {"Small", "Medium", "Large"}
+    ENCLOSURE_ENVIRONMENT = {"Savannah", "Rainforest", "Desert", "Aquatic", "Arctic", "Temperate Forest", "Mountain", "Wetlands"}
+
+    def __init__(self, name: str, size: str, environment: str, cleanliness: int) -> None:
         """
         This class represents an enclosure. Enclosures have a size and environment.
         :param size:
         :param environment:
         :param cleanliness:
         """
-        self.__name = name
-        self.__size = size
-        self.__environment = environment
-        self.__cleanliness = cleanliness
+        self.__set_name(name)
+        self.__set_size(size)
+        self.__set_environment(environment)
+        # Cleanliness is a rating from 1 to 10
+        self.__set_cleanliness(cleanliness)
+        self.__suitable_for = []
         self.__animals = []
+        self._enclosure_id: int = Enclosure._last_enclosure_id + 1
+        Enclosure._last_enclosure_id += 1
+
+    def __get_enclosure_id(self) -> str:
+        """
+        This method returns the name of the enclosure
+        :return:
+        """
+        return self._enclosure_id
 
     def __get_name(self) -> str:
         """
@@ -30,7 +45,7 @@ class Enclosure:
         """
         return self.__name
 
-    def __get_size(self) -> int:
+    def __get_size(self) -> str:
         """
         This method returns the size of the enclosure
         :return:
@@ -44,7 +59,7 @@ class Enclosure:
         """
         return self.__environment
 
-    def __get_cleanliness(self) -> str:
+    def __get_cleanliness(self) -> int:
         """
         This method returns the cleanliness of the enclosure.
         :return:
@@ -58,21 +73,27 @@ class Enclosure:
         """
         return self.__animals
 
-    def __set_name(self, name) -> None:
+    def __set_name(self, name: str) -> None:
         """
         This method updates the name of the enclosure.
         :param name:
         :return:
         """
-        self.__name = name
+        if isinstance(name, str):
+            self._name = name
+        else:
+            raise TypeError("The name must be a string.")
 
-    def __set_size(self, size) -> None:
+    def __set_size(self, size: str) -> None:
         """
         This method updates the size of the enclosure.
         :param size:
         :return:
         """
-        self.__size = size
+        if size in Enclosure.ENCLOSURE_SIZE:
+            self.__size = size
+        else:
+            raise ValueError("The species must one of the animal enclosure sizes at the zoo.")
 
     def __set_environment(self, environment: str) -> None:
         """
@@ -80,15 +101,24 @@ class Enclosure:
         :param environment:
         :return:
         """
-        self.__environment = environment
+        if environment in Enclosure.ENCLOSURE_ENVIRONMENT:
+            self.__environment = environment
+        else:
+            raise ValueError("The environment must one of the animal enclosure environments at the zoo.")
 
-    def __set_cleanliness(self, cleanliness: str) -> None:
+    def __set_cleanliness(self, cleanliness: int) -> None:
         """
         This method updates the cleanliness of the enclosure.
         :param cleanliness:
         :return:
         """
-        self.__cleanliness = cleanliness
+        if isinstance(cleanliness, int):
+            if cleanliness >= 0 & cleanliness <= 10:
+                self.__cleanliness = cleanliness
+            else:
+                raise ValueError("The cleanliness value must be between 0 and 10.")
+        else:
+            raise TypeError("The cleanliness must an integer value between 0 and 10.")
 
     def add_animal(self, animal: Animal) -> None:
         """
@@ -97,10 +127,9 @@ class Enclosure:
         :return:
         """
         if self.is_compatible(animal):
-            self.animals.append(animal)
-            animal.enclosure = self
+            self.__animals.append(animal)
         else:
-            raise ValueError("Incompatible animal for this enclosure.")
+            raise ValueError("This animal is incompatible with this enclosure.")
 
     def remove_animal(self, animal) -> None:
         """
@@ -108,23 +137,21 @@ class Enclosure:
         :param animal:
         :return:
         """
-        # TODO: Remove animal from enclosure
-        pass
+        self.__animals.remove(animal)
 
     def status(self) -> str:
         """
         This method returns the status of the enclosure.
         :return:
         """
-        self.__get_cleanliness()
+        return f"{self.__name} has a cleanliness score of {self.__cleanliness} out of 10."
 
     def clean_enclosure(self) -> None:
         """
         This method records a cleaning of the enclosure.
         :return:
         """
-        # TODO: Implement clean_enclosure.
-        pass
+        self.__cleanliness = 10
 
     def is_compatible(self, animal) -> bool:
         """
@@ -133,8 +160,15 @@ class Enclosure:
         :param animal:
         :return:
         """
-        # TODO: Implement check to see if enclosure is compatible with animal.
-        pass
+        required_enclosure_size = Animal.ZOO_ANIMALS[animal.species][0]
+        required_enclosure_environment = Animal.ZOO_ANIMALS[animal.species][1]
+        if self.__environment == required_enclosure_environment:
+            if self.__size == required_enclosure_size:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def __str__(self):
         """
@@ -144,6 +178,7 @@ class Enclosure:
         return f"Name: {self.__environment}"
 
     # Properties
+    id = property(__get_enclosure_id)
     name = property(__get_name, __set_name)
     size = property(__get_size, __set_size)
     environment = property(__get_environment, __set_environment)
