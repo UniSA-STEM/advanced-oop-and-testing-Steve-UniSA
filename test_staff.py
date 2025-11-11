@@ -3,6 +3,7 @@ from staff import Zookeeper, Veterinarian
 from animal import Bird, Mammal, Reptile
 from enclosure import Enclosure
 
+
 # Check that staff can be correctly instantiated
 def test_staff_initialization():
     keeper = Zookeeper("Alice")
@@ -13,6 +14,7 @@ def test_staff_initialization():
     assert vet.id == 2
     assert keeper.assigned_animals == []
 
+
 # Test assigning and remove animals from staff
 def test_assign_and_remove_animals():
     keeper = Zookeeper("Charlie")
@@ -22,6 +24,7 @@ def test_assign_and_remove_animals():
     keeper.remove_assigned_animals(bird)
     assert bird not in keeper.assigned_animals
 
+
 # Test that a zookeeper can feed animals
 def test_zookeeper_feed_animal():
     keeper = Zookeeper("Dana")
@@ -29,6 +32,7 @@ def test_zookeeper_feed_animal():
     assert keeper.feed_animal(bird) == "Sorry, you are not assigned to Flap"
     keeper.add_assigned_animals(bird)
     assert keeper.feed_animal(bird) == "Flap has been fed."
+
 
 # Test that a zookeeper can clean enclosures
 def test_zookeeper_clean_enclosure():
@@ -40,6 +44,7 @@ def test_zookeeper_clean_enclosure():
     keeper.add_assigned_animals(mammal)
     assert keeper.clean_enclosure(enclosure) == "Enclosure cleaned."
 
+
 # Check that a veterinarian can conduct health checks
 def test_veterinarian_health_check():
     vet = Veterinarian("Fay")
@@ -47,6 +52,7 @@ def test_veterinarian_health_check():
     assert vet.conduct_health_check(bird) == "Sorry, you are not assigned to Squawk"
     vet.add_assigned_animals(bird)
     assert vet.conduct_health_check(bird) == "Health check performed on Squawk."
+
 
 # Test string representation
 def test_staff_str_representation():

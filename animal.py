@@ -17,7 +17,8 @@ class Animal(ABC):
     # List of animals kept at this zoo
     # Stored as <Name>:[<Enclosure size>, <Enclosure environment>]
     ZOO_ANIMALS = {"Flamingo": ["Small", "Wetlands"], "Macaw": ["Small", "Rainforest"], "Penguin": ["Small", "Arctic"],
-                   "Lion": ["Large", "Savannah"], "Elephant": ["Large", "Savannah"], "Koala": ["Medium", "Temperate Forest"],
+                   "Lion": ["Large", "Savannah"], "Elephant": ["Large", "Savannah"],
+                   "Koala": ["Medium", "Temperate Forest"],
                    "Sloth": ["Medium", "Temperate Forest"], "Komodo Dragon": ["Medium", "Rainforest"],
                    "Green Iguana": ["Medium", "Rainforest"], "King Cobra": ["Medium", "Rainforest"]}
 

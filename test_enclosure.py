@@ -2,6 +2,7 @@ import pytest
 from enclosure import Enclosure
 from animal import Bird, Mammal, Reptile
 
+
 # Check that enclosures can be correctly instantiated
 def test_valid_enclosure_initialization():
     enclosure = Enclosure("Rainforest Habitat", "Medium", "Rainforest", 7)
@@ -12,20 +13,24 @@ def test_valid_enclosure_initialization():
     assert enclosure.id == 1
     assert enclosure.animals == []
 
+
 # Check for invalid name data types
 def test_invalid_name_type():
     with pytest.raises(TypeError):
         Enclosure(123, "Small", "Arctic", 5)
+
 
 # Check for invalid size
 def test_invalid_size_value():
     with pytest.raises(ValueError):
         Enclosure("Tiny Tank", "Tiny", "Aquatic", 5)
 
+
 # Check for invalid environment
 def test_invalid_environment_value():
     with pytest.raises(ValueError):
         Enclosure("Unknown Biome", "Small", "Volcano", 5)
+
 
 # Check for invalid cleanliness levels
 def test_invalid_cleanliness():
@@ -42,21 +47,25 @@ def test_clean_enclosure_sets_cleanliness_to_10():
     enclosure.clean_enclosure()
     assert enclosure.cleanliness == 10
 
+
 # Test the enclosure compatibility evaluation method
 def test_is_compatible_true():
     enclosure = Enclosure("Macaw Nest", "Small", "Rainforest", 6)
     bird = Bird("Rio", "Macaw", 2, "Herbivore")
     assert enclosure.is_compatible(bird)
 
+
 def test_is_compatible_false_due_to_size():
     enclosure = Enclosure("Tiny Tropics", "Small", "Rainforest", 6)
     reptile = Reptile("Komodo", "Komodo Dragon", 5, "Carnivore")
     assert not enclosure.is_compatible(reptile)
 
+
 def test_is_compatible_false_due_to_environment():
     enclosure = Enclosure("Arctic Dome", "Small", "Arctic", 6)
     bird = Bird("Rio", "Macaw", 2, "Herbivore")
     assert not enclosure.is_compatible(bird)
+
 
 # Test adding and removing animals from the enclosure
 def test_add_and_remove_animal():
@@ -67,6 +76,7 @@ def test_add_and_remove_animal():
     enclosure.remove_animal(bird)
     assert bird not in enclosure.animals
 
+
 # Test that adding an incompatible animal to an enclosure fails
 def test_add_incompatible_animal_raises():
     enclosure = Enclosure("Rainforest Retreat", "Small", "Rainforest", 9)
@@ -74,10 +84,12 @@ def test_add_incompatible_animal_raises():
     with pytest.raises(ValueError):
         enclosure.add_animal(mammal)
 
+
 # Test the enclosure status
 def test_enclosure_status():
     enclosure = Enclosure("Sloth Sanctuary", "Medium", "Temperate Forest", 4)
     assert enclosure.status() == "Sloth Sanctuary has a cleanliness score of 4 out of 10."
+
 
 # Test string representation
 def test_enclosure_str():

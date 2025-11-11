@@ -112,7 +112,7 @@ class Zookeeper(Staff):
         """
         for animal in enclosure.animals:
             for animal2 in self.assigned_animals:
-                if animal.id==animal2.id:
+                if animal.id == animal2.id:
                     # Clean the enclosure
                     enclosure.clean_enclosure()
                     return f"Enclosure cleaned."

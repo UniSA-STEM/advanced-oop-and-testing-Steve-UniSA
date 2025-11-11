@@ -12,7 +12,8 @@ from animal import Animal, Bird, Mammal, Reptile
 class Enclosure:
     _last_enclosure_id: int = 0
     ENCLOSURE_SIZE = {"Small", "Medium", "Large"}
-    ENCLOSURE_ENVIRONMENT = {"Savannah", "Rainforest", "Desert", "Aquatic", "Arctic", "Temperate Forest", "Mountain", "Wetlands"}
+    ENCLOSURE_ENVIRONMENT = {"Savannah", "Rainforest", "Desert", "Aquatic", "Arctic", "Temperate Forest", "Mountain",
+                             "Wetlands"}
 
     def __init__(self, name: str, size: str, environment: str, cleanliness: int) -> None:
         """

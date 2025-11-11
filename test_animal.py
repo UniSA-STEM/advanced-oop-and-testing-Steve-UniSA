@@ -1,6 +1,7 @@
 import pytest
 from animal import Bird, Mammal, Reptile
 
+
 # Check that birds can be correctly instantiated
 def test_valid_bird_initialization():
     bird = Bird("Fiona", "Flamingo", 3, "Herbivore")
@@ -10,6 +11,7 @@ def test_valid_bird_initialization():
     assert bird.diet == "Herbivore"
     assert bird.id == 1
     assert not bird.sleeping
+
 
 # Check that mammals can be correctly instantiated
 def test_valid_mammal_initialization():
@@ -21,6 +23,7 @@ def test_valid_mammal_initialization():
     assert mammal.id == 2
     assert not mammal.sleeping
 
+
 # Check that reptiles can be correctly instantiated
 def test_valid_reptile_initialization():
     reptile = Reptile("Kaa", "King Cobra", 3, "Omnivore")
@@ -31,6 +34,7 @@ def test_valid_reptile_initialization():
     assert reptile.id == 3
     assert not reptile.sleeping
 
+
 # Check for invalid name data types
 def test_invalid_name_type_raises():
     with pytest.raises(TypeError):
@@ -38,11 +42,13 @@ def test_invalid_name_type_raises():
         Mammal(45.6, "Lion", 6, "Carnivore")
         Reptile(["Kaa"], "King Cobra", 3, "Omnivore")
 
+
 def test_invalid_name_value_raises():
     with pytest.raises(ValueError):
         Bird("Fiona!", "Flamingo", 3, "Herbivore")
         Mammal("Simba_1", "Lion", 6, "Carnivore")
         Reptile("Kaa_snake", "King Cobra", 3, "Omnivore")
+
 
 # Check for invalid species data types
 def test_invalid_species_raises():
@@ -51,6 +57,7 @@ def test_invalid_species_raises():
         Mammal("Simba", {"Lion"}, 6, "Carnivore")
         Reptile("Kaa", 123, 3, "Omnivore")
 
+
 # Check for invalid ages
 def test_invalid_age_raises():
     with pytest.raises(ValueError):
@@ -58,12 +65,14 @@ def test_invalid_age_raises():
         Mammal("Simba", "Lion", 6.9, "Carnivore")
         Reptile("Kaa", "King Cobra", "five", "Omnivore")
 
+
 # Check for invalid diets
 def test_invalid_diet_raises():
     with pytest.raises(TypeError):
         Bird("Fiona", "Flamingo", 3, 45.2)
         Mammal("Simba", "Lion", 6, 3)
         Reptile("Kaa", "King Cobra", 3, ["Herbivore", "Carnivore"])
+
 
 # Test Sleep and Awake
 def test_sleep_and_awake():
@@ -74,6 +83,7 @@ def test_sleep_and_awake():
     assert mammal.awake() == "Ellie is awake."
     assert not mammal.sleeping
 
+
 # Test feeding behavior
 def test_eat_behavior():
     reptile = Reptile("Iggy", "Green Iguana", 2, "Herbivore")
@@ -82,18 +92,22 @@ def test_eat_behavior():
     assert reptile.eat() == "Iggy is a herbivore and eats plants."
     assert not reptile._needs_feeding
 
+
 # Test sounds
 def test_make_sound_bird():
     bird = Bird("Squawk", "Macaw", 2, "Herbivore")
     assert bird.make_sound() == "Squawk chirps or squawks."
 
+
 def test_make_sound_mammal():
     mammal = Mammal("Leo", "Lion", 5, "Carnivore")
     assert mammal.make_sound() == "Leo roars or growls."
 
+
 def test_make_sound_reptile():
     reptile = Reptile("Slither", "King Cobra", 4, "Carnivore")
     assert reptile.make_sound() == "Slither hisses."
+
 
 # Test string representation
 def test_str_representation():
@@ -103,4 +117,3 @@ def test_str_representation():
     assert str(bird) == f"Id: {bird.id} Name: Flap Species: Penguin"
     assert str(mammal) == f"Id: {mammal.id} Name: Leo Species: Lion"
     assert str(reptile) == f"Id: {reptile.id} Name: Slither Species: King Cobra"
-

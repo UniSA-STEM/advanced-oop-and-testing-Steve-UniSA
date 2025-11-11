@@ -55,7 +55,7 @@ if __name__ == '__main__':
     try:
         Reptile("animal_name", "species[name.index(animal_name)]", 10, "herbivore")
     except Exception as ex:
-        print (f"{ex}\n")
+        print(f"{ex}\n")
 
     # Create staff
     zookeeper_fred = Zookeeper("Fred")
