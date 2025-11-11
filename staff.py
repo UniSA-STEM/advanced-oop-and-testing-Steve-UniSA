@@ -99,7 +99,7 @@ class Zookeeper(Staff):
         :return: string
         """
         for animal2 in self.assigned_animals:
-            if animal.id == animal.id:
+            if animal2.id == animal.id:
                 # Feed the animal
                 return f"{animal.name} has been fed."
         return f"Sorry, you are not assigned to {animal.name}"

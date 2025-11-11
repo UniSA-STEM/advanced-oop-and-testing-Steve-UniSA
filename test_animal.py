@@ -1,5 +1,5 @@
 import pytest
-from animal import Bird, Mammal, Reptile, Animal
+from animal import Bird, Mammal, Reptile
 
 # Check that birds can be correctly instantiated
 def test_valid_bird_initialization():

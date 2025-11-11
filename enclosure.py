@@ -28,15 +28,15 @@ class Enclosure:
         self.__set_cleanliness(cleanliness)
         self.__suitable_for = []
         self.__animals = []
-        self._enclosure_id: int = Enclosure._last_enclosure_id + 1
+        self.__enclosure_id: int = Enclosure._last_enclosure_id + 1
         Enclosure._last_enclosure_id += 1
 
-    def __get_enclosure_id(self) -> str:
+    def __get_enclosure_id(self) -> int:
         """
         This method returns the name of the enclosure
         :return:
         """
-        return self._enclosure_id
+        return self.__enclosure_id
 
     def __get_name(self) -> str:
         """
