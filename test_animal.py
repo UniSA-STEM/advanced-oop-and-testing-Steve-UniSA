@@ -13,23 +13,23 @@ def test_valid_bird_initialization():
 
 # Check that mammals can be correctly instantiated
 def test_valid_mammal_initialization():
-    bird = Mammal("Simba", "Lion", 6, "Carnivore")
-    assert bird.name == "Simba"
-    assert bird.species == "Lion"
-    assert bird.age == 6
-    assert bird.diet == "Carnivore"
-    assert bird.id == 2
-    assert not bird.sleeping
+    mammal = Mammal("Simba", "Lion", 6, "Carnivore")
+    assert mammal.name == "Simba"
+    assert mammal.species == "Lion"
+    assert mammal.age == 6
+    assert mammal.diet == "Carnivore"
+    assert mammal.id == 2
+    assert not mammal.sleeping
 
 # Check that reptiles can be correctly instantiated
 def test_valid_reptile_initialization():
-    bird = Reptile("Kaa", "King Cobra", 3, "Omnivore")
-    assert bird.name == "Kaa"
-    assert bird.species == "King Cobra"
-    assert bird.age == 3
-    assert bird.diet == "Omnivore"
-    assert bird.id == 3
-    assert not bird.sleeping
+    reptile = Reptile("Kaa", "King Cobra", 3, "Omnivore")
+    assert reptile.name == "Kaa"
+    assert reptile.species == "King Cobra"
+    assert reptile.age == 3
+    assert reptile.diet == "Omnivore"
+    assert reptile.id == 3
+    assert not reptile.sleeping
 
 # Check for invalid name data types
 def test_invalid_name_type_raises():

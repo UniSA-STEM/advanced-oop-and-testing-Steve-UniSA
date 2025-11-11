@@ -80,7 +80,7 @@ class Enclosure:
         :return:
         """
         if isinstance(name, str):
-            self._name = name
+            self.__name = name
         else:
             raise TypeError("The name must be a string.")
 
@@ -175,7 +175,7 @@ class Enclosure:
         The string conversion method returns the enclosure environment.
         :return:
         """
-        return f"Name: {self.__environment}"
+        return f"Name: {self.__name}"
 
     # Properties
     id = property(__get_enclosure_id)

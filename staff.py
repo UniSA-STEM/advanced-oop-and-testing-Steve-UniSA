@@ -98,11 +98,11 @@ class Zookeeper(Staff):
         :param animal:
         :return: string
         """
-        if self._assigned_animals.__contains__(animal):
-            # Feed the animal
-            return f"{animal.name} has been fed."
-        else:
-            return f"Sorry, you are not assigned to {animal.name}"
+        for animal2 in self.assigned_animals:
+            if animal.id == animal.id:
+                # Feed the animal
+                return f"{animal.name} has been fed."
+        return f"Sorry, you are not assigned to {animal.name}"
 
     def clean_enclosure(self, enclosure: Enclosure) -> str:
         """
@@ -110,12 +110,13 @@ class Zookeeper(Staff):
         :param enclosure:
         :return: string
         """
-        if self._assigned_animals.__contains__(enclosure):
-            # Clean the enclosure
-            enclosure.clean_enclosure()
-            return f"Enclosure cleaned."
-        else:
-            return f"Sorry, you are not assigned to {enclosure.name}"
+        for animal in enclosure.animals:
+            for animal2 in self.assigned_animals:
+                if animal.id==animal2.id:
+                    # Clean the enclosure
+                    enclosure.clean_enclosure()
+                    return f"Enclosure cleaned."
+        return f"Sorry, you are not assigned to {enclosure.name}"
 
 
 class Veterinarian(Staff):
@@ -133,8 +134,8 @@ class Veterinarian(Staff):
         :param animal:
         :return: string
         """
-        if self._assigned_animals.__contains__(animal):
-            # Conduct the health check
-            return f"Health check performed on {animal.name}."
-        else:
-            return f"Sorry, you are not assigned to {animal.name}"
+        for animal2 in self.assigned_animals:
+            if animal.id == animal.id:
+                # Feed the animal
+                return f"Health check performed on {animal.name}."
+        return f"Sorry, you are not assigned to {animal.name}"

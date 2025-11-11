@@ -101,3 +101,12 @@ if __name__ == '__main__':
         if animal.id == 4:
             print(f"\n{savannah1.is_compatible(animal)}")
 
+    keeper = Zookeeper("Eli")
+    enclosure = Enclosure("savannah1", "Large", "Savannah", 10)
+    mammal = Mammal("Simba", "Lion", 6, "Carnivore")
+    enclosure.add_animal(mammal)
+    print(keeper.clean_enclosure(enclosure))
+    keeper.add_assigned_animals(mammal)
+    for animal in keeper.assigned_animals:
+        print(animal)
+    print(keeper.clean_enclosure(enclosure))
