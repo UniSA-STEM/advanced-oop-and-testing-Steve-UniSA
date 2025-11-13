@@ -11,7 +11,7 @@ import random
 from animal import Bird, Mammal, Reptile
 from staff import Zookeeper, Veterinarian
 from enclosure import Enclosure
-
+from reports import Reports
 
 def create_zoo():
     diet_options = ["Herbivore", "Carnivore", "Omnivore"]
@@ -110,3 +110,6 @@ if __name__ == '__main__':
     for animal in keeper.assigned_animals:
         print(animal)
     print(keeper.clean_enclosure(enclosure))
+
+    report = Reports()
+    print(report.test_report())

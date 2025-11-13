@@ -1,3 +1,12 @@
+"""
+File: test_enclosure.py
+Description: This file contains the unit tests for the Enclosure class.
+Author: Stephen Corns
+ID: 110457922
+Username: CORSY034
+This is my own work as defined by the University's Academic Misconduct Policy.
+"""
+
 import pytest
 from enclosure import Enclosure
 from animal import Bird, Mammal, Reptile

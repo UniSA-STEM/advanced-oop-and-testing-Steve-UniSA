@@ -1,4 +1,12 @@
-import pytest
+"""
+File: test_staff.py
+Description: This file contains the unit tests for the Staff class.
+Author: Stephen Corns
+ID: 110457922
+Username: CORSY034
+This is my own work as defined by the University's Academic Misconduct Policy.
+"""
+
 from staff import Zookeeper, Veterinarian
 from animal import Bird, Mammal, Reptile
 from enclosure import Enclosure
