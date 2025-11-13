@@ -13,6 +13,7 @@ from staff import Zookeeper, Veterinarian
 from enclosure import Enclosure
 from reports import Reports
 
+
 def create_zoo():
     diet_options = ["Herbivore", "Carnivore", "Omnivore"]
 
@@ -22,7 +23,7 @@ def create_zoo():
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Bird.DIET_OPTIONS))
-        new_animal = Bird(animal_name, species[name.index(animal_name)], age, diet)
+        new_animal = Bird(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
         zoo_animals.append(new_animal)
 
     # Create mammals
@@ -31,7 +32,7 @@ def create_zoo():
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Mammal.DIET_OPTIONS))
-        new_animal = Mammal(animal_name, species[name.index(animal_name)], age, diet)
+        new_animal = Mammal(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
         zoo_animals.append(new_animal)
 
     # Create reptiles
@@ -40,7 +41,7 @@ def create_zoo():
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Reptile.DIET_OPTIONS))
-        new_animal = Reptile(animal_name, species[name.index(animal_name)], age, diet)
+        new_animal = Reptile(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
         zoo_animals.append(new_animal)
 
     for new_animal in zoo_animals:
@@ -53,7 +54,7 @@ def create_zoo():
 
 if __name__ == '__main__':
     try:
-        Reptile("animal_name", "species[name.index(animal_name)]", 10, "herbivore")
+        Reptile("animal_name", "species[name.index(animal_name)]", 10, "herbivore", "Healthy")
     except Exception as ex:
         print(f"{ex}\n")
 
@@ -96,14 +97,17 @@ if __name__ == '__main__':
         if animal.id == 6:
             print(f"\n{veterinarian_steve.conduct_health_check(animal)}")
         if animal.id == 7:
+            animal._needs_feeding = True
             print(f"\n{zookeeper_fred.feed_animal(animal)}")
             print(f"\n{zookeeper_george.feed_animal(animal)}")
+            print(f"\n{zookeeper_george.feed_animal(animal)}")
+
         if animal.id == 4:
             print(f"\n{savannah1.is_compatible(animal)}")
 
     keeper = Zookeeper("Eli")
     enclosure = Enclosure("savannah1", "Large", "Savannah", 10)
-    mammal = Mammal("Simba", "Lion", 6, "Carnivore")
+    mammal = Mammal("Simba", "Lion", 6, "Carnivore", "Healthy")
     enclosure.add_animal(mammal)
     print(keeper.clean_enclosure(enclosure))
     keeper.add_assigned_animals(mammal)
@@ -112,4 +116,7 @@ if __name__ == '__main__':
     print(keeper.clean_enclosure(enclosure))
 
     report = Reports()
-    print(report.test_report())
+    print(report.staff_report())
+    print(report.animal_report())
+    print(report.enclosure_report())
+    print(report.animal_health_report())

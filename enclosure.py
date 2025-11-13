@@ -7,10 +7,12 @@ Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 from animal import Animal, Bird, Mammal, Reptile
+from typing import List
 
 
 class Enclosure:
     _last_enclosure_id: int = 0
+    enclosure_list: List[Enclosure] = []
     ENCLOSURE_SIZE = {"Small", "Medium", "Large"}
     ENCLOSURE_ENVIRONMENT = {"Savannah", "Rainforest", "Desert", "Aquatic", "Arctic", "Temperate Forest", "Mountain",
                              "Wetlands"}
@@ -31,6 +33,7 @@ class Enclosure:
         self.__animals = []
         self.__enclosure_id: int = Enclosure._last_enclosure_id + 1
         Enclosure._last_enclosure_id += 1
+        self.enclosure_list.append(self)
 
     def __get_enclosure_id(self) -> int:
         """

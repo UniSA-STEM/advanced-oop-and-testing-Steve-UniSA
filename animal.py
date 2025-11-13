@@ -7,11 +7,13 @@ Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 from abc import ABC, abstractmethod
+from typing import List
 
 
 class Animal(ABC):
     # Track the highest animal ID
     _last_animal_id: int = 0
+    animal_list: List[Animal] = []
     # List of diet types
     DIET_OPTIONS = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
     # List of animals kept at this zoo
@@ -22,7 +24,7 @@ class Animal(ABC):
                    "Sloth": ["Medium", "Temperate Forest"], "Komodo Dragon": ["Medium", "Rainforest"],
                    "Green Iguana": ["Medium", "Rainforest"], "King Cobra": ["Medium", "Rainforest"]}
 
-    def __init__(self, name: str, species: str, age: int, diet: str) -> None:
+    def __init__(self, name: str, species: str, age: int, diet: str, health: str) -> None:
         """
         This class represents a universal animal. Animals have a name, species, age and diet.
         :param name:
@@ -34,10 +36,12 @@ class Animal(ABC):
         self._set_species(species)
         self._set_age(age)
         self._set_diet(diet)
+        self._set_health(health)
         self._needs_feeding: bool = False
         self._sleeping: bool = False
         self._animal_id: int = Animal._last_animal_id + 1
         Animal._last_animal_id += 1
+        self.animal_list.append(self)
 
     def _get_animal_id(self) -> int:
         """
@@ -81,7 +85,10 @@ class Animal(ABC):
         """
         return self._sleeping
 
-    def _set_name(self, name) -> None:
+    def _get_health(self) -> str:
+        return self._health
+
+    def _set_name(self, name: str) -> None:
         """
         This method updates the name of the animal.
         :param name:
@@ -133,6 +140,14 @@ class Animal(ABC):
                 raise ValueError("The name must be a string using only alphabetical characters.")
         else:
             raise TypeError("The name must be a string.")
+
+    def _set_health(self, health: str) -> None:
+        """
+        This method updates the health status of the animal.
+        :param health:
+        :return:
+        """
+        self._health = health
 
     def _set_needs_feeding(self) -> None:
         """
@@ -190,11 +205,12 @@ class Animal(ABC):
     species = property(_get_species, _set_species)
     age = property(_get_age, _set_age)
     diet = property(_get_diet, _set_diet)
+    health = property(_get_health, _set_health)
     sleeping = property(_get_sleeping)
 
 
 class Bird(Animal):
-    def __init__(self, name, species, age, diet):
+    def __init__(self, name, species, age, diet, health):
         """
         This class represents a bird animal. Animals have a name, species, age and diet.
         :param name:
@@ -202,7 +218,7 @@ class Bird(Animal):
         :param age:
         :param diet:
         """
-        super().__init__(name, species, age, diet)
+        super().__init__(name, species, age, diet, health)
 
     def make_sound(self):
         """
@@ -221,8 +237,8 @@ class Mammal(Animal):
     :param diet:
     """
 
-    def __init__(self, name, species, age, diet):
-        super().__init__(name, species, age, diet)
+    def __init__(self, name, species, age, diet, health):
+        super().__init__(name, species, age, diet, health)
 
     def make_sound(self):
         """
@@ -241,8 +257,8 @@ class Reptile(Animal):
     :param diet:
     """
 
-    def __init__(self, name, species, age, diet):
-        super().__init__(name, species, age, diet)
+    def __init__(self, name, species, age, diet, health):
+        super().__init__(name, species, age, diet, health)
 
     def make_sound(self):
         """

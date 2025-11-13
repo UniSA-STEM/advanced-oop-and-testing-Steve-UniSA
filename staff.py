@@ -14,16 +14,18 @@ from enclosure import Enclosure
 
 class Staff(ABC):
     _last_staff_id: int = 0
+    staff_list: List[Staff] = []
 
     def __init__(self, name) -> None:
         """
         This class represents the universal staff of the zoo. Staff have a name, role, and duties.
         :param name:
         """
-        self._staff_id: int = Staff._last_staff_id + 1
-        Staff._last_staff_id += 1
         self._set_name(name)
         self._assigned_animals = []
+        self._staff_id: int = Staff._last_staff_id + 1
+        Staff._last_staff_id += 1
+        self.staff_list.append(self)
 
     def _get_staff_id(self) -> int:
         """
@@ -101,6 +103,7 @@ class Zookeeper(Staff):
         for animal2 in self.assigned_animals:
             if animal2.id == animal.id:
                 # Feed the animal
+                animal.eat()
                 return f"{animal.name} has been fed."
         return f"Sorry, you are not assigned to {animal.name}"
 
@@ -136,6 +139,6 @@ class Veterinarian(Staff):
         """
         for animal2 in self.assigned_animals:
             if animal.id == animal.id:
-                # Feed the animal
-                return f"Health check performed on {animal.name}."
+                # Conduct the health check
+                return f"Health check performed on {animal.name}. {animal.name} {animal.species} is {animal.health}."
         return f"Sorry, you are not assigned to {animal.name}"
