@@ -13,6 +13,7 @@ from typing import List
 class Animal(ABC):
     # Track the highest animal ID
     _last_animal_id: int = 0
+    # Track the list of animals created for reporting purposes
     animal_list: List[Animal] = []
     # List of diet types
     DIET_OPTIONS = {"Herbivore": "plants", "Carnivore": "meat", "Omnivore": "both plants and meat"}
@@ -31,6 +32,7 @@ class Animal(ABC):
         :param species:
         :param age:
         :param diet:
+        :param health:
         """
         self._set_name(name)
         self._set_species(species)
@@ -217,6 +219,7 @@ class Bird(Animal):
         :param species:
         :param age:
         :param diet:
+        :param health:
         """
         super().__init__(name, species, age, diet, health)
 
@@ -235,6 +238,7 @@ class Mammal(Animal):
     :param species:
     :param age:
     :param diet:
+    :param: health:
     """
 
     def __init__(self, name, species, age, diet, health):
@@ -255,6 +259,7 @@ class Reptile(Animal):
     :param species:
     :param age:
     :param diet:
+    :param health:
     """
 
     def __init__(self, name, species, age, diet, health):

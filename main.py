@@ -6,6 +6,7 @@ ID: 110457922
 Username: CORSY034
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+# Random is used to create test animals for the demonstration script.
 import random
 
 from animal import Bird, Mammal, Reptile
