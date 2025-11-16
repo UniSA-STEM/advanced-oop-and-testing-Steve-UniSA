@@ -211,6 +211,6 @@ def test_str_representation(flamingo, lion, cobra):
     :param cobra:
     :return:
     """
-    assert str(flamingo) == f"Id: {flamingo.id} Name: Fiona Species: Flamingo"
-    assert str(lion) == f"Id: {lion.id} Name: Simba Species: Lion"
-    assert str(cobra) == f"Id: {cobra.id} Name: Kaa Species: King Cobra"
+    assert str(flamingo) == f"Id: {flamingo.id} Name: Fiona Species: Flamingo Health: Healthy"
+    assert str(lion) == f"Id: {lion.id} Name: Simba Species: Lion Health: Healthy"
+    assert str(cobra) == f"Id: {cobra.id} Name: Kaa Species: King Cobra Health: Healthy"

@@ -120,7 +120,7 @@ class Zookeeper(Staff):
                 if animal.id == animal2.id:
                     # Clean the enclosure
                     enclosure.clean_enclosure()
-                    return f"Enclosure cleaned."
+                    return f"{enclosure.name} enclosure has been cleaned."
         return f"Sorry, you are not assigned to {enclosure.name}"
 
 
@@ -142,5 +142,5 @@ class Veterinarian(Staff):
         for animal2 in self.assigned_animals:
             if animal.id == animal.id:
                 # Conduct the health check
-                return f"Health check performed on {animal.name}. {animal.name} {animal.species} is {animal.health}."
+                return f"Health check performed on {animal.name}. {animal.name} {animal.species} is {animal.health}"
         return f"Sorry, you are not assigned to {animal.name}"

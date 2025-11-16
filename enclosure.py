@@ -33,7 +33,6 @@ class Enclosure:
         self.__set_environment(environment)
         # Cleanliness is a rating from 1 to 10. 10 is cleanest.
         self.__set_cleanliness(cleanliness)
-        self.__suitable_for = []
         self.__animals = []
         self.__enclosure_id: int = Enclosure._last_enclosure_id + 1
         Enclosure._last_enclosure_id += 1

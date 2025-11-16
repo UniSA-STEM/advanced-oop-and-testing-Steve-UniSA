@@ -118,3 +118,64 @@ if __name__ == '__main__':
                     enclosure_assigned = True
     print("-" * 80)
 
+    print(f"Update animal health ...")
+    for animal in Animal.animal_list:
+        if animal.id == 1:
+            animal.hungry()
+        elif animal.id == 3:
+            animal.health = "Unwell. Ate bad sardines."
+            print(f"{animal.name}'s health status is {animal.health}")
+        elif animal.id == 5:
+            animal.hungry()
+        elif animal.id == 6:
+            animal.health = "Requires close supervision. Not eating sufficient leaves."
+            print(f"{animal.name}'s health status is {animal.health}")
+        elif animal.id == 9:
+            animal.hungry()
+
+    print(f"\nConduct health checks ...")
+    for animal in Animal.animal_list:
+        print(f"{veterinarian_steve.conduct_health_check(animal)}")
+        if animal.needs_feeding:
+            print(f"*** {animal.name} needs feeding")
+
+    print(f"\nFeed the animals ...")
+    for assigned_animal in zookeeper_fred.assigned_animals:
+        if assigned_animal.needs_feeding:
+            print(zookeeper_fred.feed_animal(assigned_animal))
+
+    for assigned_animal in zookeeper_george.assigned_animals:
+        if assigned_animal.needs_feeding:
+            print(zookeeper_george.feed_animal(assigned_animal))
+
+    print(f"\nClean the enclosures")
+    for assigned_animal in zookeeper_fred.assigned_animals:
+        for enclosure in Enclosure.enclosure_list:
+            for enclosure_animal in enclosure.animals:
+                if assigned_animal.id == enclosure_animal.id:
+                    print(f"{zookeeper_fred.name}: {zookeeper_fred.clean_enclosure(enclosure)}")
+
+    for assigned_animal in zookeeper_george.assigned_animals:
+        for enclosure in Enclosure.enclosure_list:
+            for enclosure_animal in enclosure.animals:
+                if assigned_animal.id == enclosure_animal.id:
+                    print(f"{zookeeper_george.name}: {zookeeper_george.clean_enclosure(enclosure)}")
+
+    print("-" * 80)
+
+    print(f"\nRecord whether an animal is awake of asleep ...")
+    for animal in Animal.animal_list:
+        if animal.id % 2 ==0:
+            animal.sleep()
+        if animal.sleeping:
+            print(f"{animal.name} is sleeping.")
+        else:
+            print(f"{animal.name} is awake.")
+
+
+
+
+
+
+
+

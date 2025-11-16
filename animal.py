@@ -87,7 +87,18 @@ class Animal(ABC):
         """
         return self._sleeping
 
+    def _get_needs_feeding(self) -> bool:
+        """
+        Returns whether of not the animal needs feeding
+        :return:
+        """
+        return self._needs_feeding
+
     def _get_health(self) -> str:
+        """
+        Returns the animal's health report.
+        :return:
+        """
         return self._health
 
     def _set_name(self, name: str) -> None:
@@ -167,6 +178,13 @@ class Animal(ABC):
         """
         ...
 
+    def hungry(self):
+        """
+        Mark the animal as requiring feeding
+        :return:
+        """
+        self._set_needs_feeding()
+
     def eat(self):
         """
         This method allows the system to record that the animal has eaten.
@@ -209,6 +227,7 @@ class Animal(ABC):
     diet = property(_get_diet, _set_diet)
     health = property(_get_health, _set_health)
     sleeping = property(_get_sleeping)
+    needs_feeding = property(_get_needs_feeding)
 
 
 class Bird(Animal):

@@ -219,4 +219,4 @@ def test_enclosure_str(medium_rainforest_enclosure):
     :param medium_rainforest_enclosure:
     :return:
     """
-    assert str(medium_rainforest_enclosure) == "Name: Rainforest Habitat"
+    assert str(medium_rainforest_enclosure) == "Name: Rainforest Habitat Environment: Rainforest Cleanliness: 7"
