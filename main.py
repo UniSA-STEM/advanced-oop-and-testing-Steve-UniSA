@@ -9,23 +9,19 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 # Random is used to create test animals for the demonstration script.
 import random
 
-from animal import Bird, Mammal, Reptile
-from staff import Zookeeper, Veterinarian
+from animal import Bird, Mammal, Reptile, Animal
+from staff import Zookeeper, Veterinarian, Staff
 from enclosure import Enclosure
 from reports import Reports
 
-
-def create_zoo():
-    diet_options = ["Herbivore", "Carnivore", "Omnivore"]
-
+def create_animals():
     # Create birds
     name = ["Fiona", "Diego", "Percy"]
     species = ["Flamingo", "Macaw", "Penguin"]
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Bird.DIET_OPTIONS))
-        new_animal = Bird(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
-        zoo_animals.append(new_animal)
+        print(Bird(animal_name, species[name.index(animal_name)], age, diet, "Healthy"))
 
     # Create mammals
     name = ["Simba", "Eleanor", "Kylie", "Stanley"]
@@ -33,8 +29,7 @@ def create_zoo():
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Mammal.DIET_OPTIONS))
-        new_animal = Mammal(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
-        zoo_animals.append(new_animal)
+        print(Mammal(animal_name, species[name.index(animal_name)], age, diet, "Healthy"))
 
     # Create reptiles
     name = ["Drake", "Izzy", "Kaa"]
@@ -42,82 +37,84 @@ def create_zoo():
     for animal_name in name:
         age = random.randint(1, 25)
         diet = random.choice(list(Reptile.DIET_OPTIONS))
-        new_animal = Reptile(animal_name, species[name.index(animal_name)], age, diet, "Healthy")
-        zoo_animals.append(new_animal)
+        print(Reptile(animal_name, species[name.index(animal_name)], age, diet, "Healthy"))
 
-    for new_animal in zoo_animals:
+if __name__ == '__main__':
+    print("-" * 42)
+    print(f"Demonstration of the zoo management system")
+    print("-" * 42)
+
+    print("-" * 80)
+    print(f"Creating staff ...")
+    print(f"Creating zookeepers ...")
+    for staff_name in ["Fred", "George"]:
+        print(Zookeeper(staff_name))
+    print(f"Creating veterinarians ...")
+    for staff_name in ["Steve"]:
+        print(Veterinarian(staff_name))
+
+    print(f"\nCreating enclosures ...")
+    # Create enclosures
+    print(Enclosure("wetlands_1", "Small", "Wetlands", 10))
+    print(Enclosure("rainforest_1", "Small", "Rainforest", 10))
+    print(Enclosure("arctic_1", "Small", "Arctic", 10))
+    print(Enclosure("savannah_1", "Large", "Savannah", 10))
+    print(Enclosure("savannah_2", "Large", "Savannah", 10))
+    print(Enclosure("temperate_forest_1", "Medium", "Temperate Forest", 10))
+    print(Enclosure("temperate_forest_2", "Medium", "Temperate Forest", 10))
+    print(Enclosure("rainforest_2", "Medium", "Rainforest", 10))
+    print(Enclosure("rainforest_3", "Medium", "Rainforest", 10))
+    print(Enclosure("rainforest_4", "Medium", "Rainforest", 10))
+
+    print(f"\nCreating animals ...")
+    create_animals()
+    print("-" * 80)
+
+    print(f"Assign animals to staff ...")
+    veterinarian_steve = None
+    zookeeper_fred = None
+    zookeeper_george = None
+    for staff_member in Staff.staff_list:
+        if staff_member.name == "Steve" and type(staff_member).__name__=="Veterinarian":
+            veterinarian_steve = staff_member
+        elif staff_member.name == "Fred" and type(staff_member).__name__=="Zookeeper":
+            zookeeper_fred = staff_member
+        elif staff_member.name == "George" and type(staff_member).__name__=="Zookeeper":
+            zookeeper_george = staff_member
+
+    for new_animal in Animal.animal_list:
         veterinarian_steve.add_assigned_animals(new_animal)
         if new_animal.id <= 5:
             zookeeper_fred.add_assigned_animals(new_animal)
         else:
             zookeeper_george.add_assigned_animals(new_animal)
 
+    print(f"Animals assigned to Steve the veterinarian ...")
+    for assigned_animal in veterinarian_steve.assigned_animals:
+        print(assigned_animal.name)
 
-if __name__ == '__main__':
-    try:
-        Reptile("animal_name", "species[name.index(animal_name)]", 10, "herbivore", "Healthy")
-    except Exception as ex:
-        print(f"{ex}\n")
+    print(f"\nAnimals assigned to Fred the zookeeper ...")
+    for assigned_animal in zookeeper_fred.assigned_animals:
+        print(assigned_animal.name)
 
-    # Create staff
-    zookeeper_fred = Zookeeper("Fred")
-    zookeeper_george = Zookeeper("George")
-    veterinarian_steve = Veterinarian("Steve")
+    print(f"\nAnimals assigned to George the zookeeper ...")
+    for assigned_animal in zookeeper_george.assigned_animals:
+        print(assigned_animal.name)
 
-    # Create enclosures
-    savannah1 = Enclosure("savannah1", "Large", "Savannah", 10)
-    savannah2 = Enclosure("savannah2", "Large", "Savannah", 10)
-    rainforest1 = Enclosure("rainforest1", "Large", "Rainforest", 10)
-    rainforest2 = Enclosure("rainforest2", "Large", "Rainforest", 10)
-    temperate_forest1 = Enclosure("temperate_forest1", "Large", "Temperate Forest", 10)
-    temperate_forest2 = Enclosure("temperate_forest2", "Large", "Temperate Forest", 10)
+    print("-" * 80)
+    print(f"Assign animals to enclosures ...")
+    print(f"List enclosure requirements for each animal ...")
+    for new_animal in Animal.animal_list:
+        print(f"{new_animal.name} the {new_animal.species} requires a "
+              f"{Animal.ZOO_ANIMALS[new_animal.species][0].lower()} {Animal.ZOO_ANIMALS[new_animal.species][1].lower()} enclosure.")
+        enclosure_assigned = False
+        for enclosure in Enclosure.enclosure_list:
+            if (enclosure.environment == Animal.ZOO_ANIMALS[new_animal.species][1]
+                    and enclosure.size == Animal.ZOO_ANIMALS[new_animal.species][0]
+                    and enclosure_assigned == False):
+                if len(enclosure.animals) == 0:
+                    enclosure.add_animal(new_animal)
+                    print(f"{new_animal.name} the {new_animal.species} has been assigned to {enclosure.name}.")
+                    enclosure_assigned = True
+    print("-" * 80)
 
-    zoo_animals = []
-    create_zoo()
-
-    for animal in zoo_animals:
-        print(animal)
-        print(animal.make_sound())
-        print(animal.sleep())
-        print(animal.eat())
-
-    print(f"\nAnimals assigned to veterinarian Steve:")
-    for animal in veterinarian_steve.assigned_animals:
-        print(animal)
-
-    print(f"\nAnimals assigned to zookeeper Fred:")
-    for animal in zookeeper_fred.assigned_animals:
-        print(animal)
-
-    print(f"\nAnimals assigned to zookeeper George:")
-    for animal in zookeeper_george.assigned_animals:
-        print(animal)
-
-    # Find animal id 6
-    for animal in zoo_animals:
-        if animal.id == 6:
-            print(f"\n{veterinarian_steve.conduct_health_check(animal)}")
-        if animal.id == 7:
-            animal._needs_feeding = True
-            print(f"\n{zookeeper_fred.feed_animal(animal)}")
-            print(f"\n{zookeeper_george.feed_animal(animal)}")
-            print(f"\n{zookeeper_george.feed_animal(animal)}")
-
-        if animal.id == 4:
-            print(f"\n{savannah1.is_compatible(animal)}")
-
-    keeper = Zookeeper("Eli")
-    enclosure = Enclosure("savannah1", "Large", "Savannah", 10)
-    mammal = Mammal("Simba", "Lion", 6, "Carnivore", "Healthy")
-    enclosure.add_animal(mammal)
-    print(keeper.clean_enclosure(enclosure))
-    keeper.add_assigned_animals(mammal)
-    for animal in keeper.assigned_animals:
-        print(animal)
-    print(keeper.clean_enclosure(enclosure))
-
-    report = Reports()
-    print(report.staff_report())
-    print(report.animal_report())
-    print(report.enclosure_report())
-    print(report.animal_health_report())

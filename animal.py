@@ -199,7 +199,7 @@ class Animal(ABC):
         The string conversion method returns the animal name and species.
         :return:
         """
-        return f"Id: {self._animal_id} Name: {self._name} Species: {self._species}"
+        return f"Id: {self._animal_id} Name: {self._name} Species: {self._species} Health: {self._health}"
 
     # Properties
     id = property(_get_animal_id)

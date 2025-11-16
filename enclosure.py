@@ -183,7 +183,7 @@ class Enclosure:
         The string conversion method returns the enclosure environment.
         :return:
         """
-        return f"Name: {self.__name}"
+        return f"Name: {self.__name} Environment: {self.__environment} Cleanliness: {self.__cleanliness}"
 
     # Properties
     id = property(__get_enclosure_id)
