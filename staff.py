@@ -13,7 +13,9 @@ from enclosure import Enclosure
 
 
 class Staff(ABC):
+    # Track the highest staff ID
     _last_staff_id: int = 0
+    # Track the list of staff records created for reporting purposes
     staff_list: List[Staff] = []
 
     def __init__(self, name) -> None:
