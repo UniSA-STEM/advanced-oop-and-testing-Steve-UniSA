@@ -172,6 +172,15 @@ if __name__ == '__main__':
         else:
             print(f"{animal.name} is awake.")
 
+    print("-" * 80)
+    print(f"\nPrint reports ...")
+    reports = Reports()
+    print(reports.staff_report())
+    print(reports.animal_report())
+    print(reports.enclosure_report())
+    print(reports.animal_health_report())
+
+
 
 
 
