@@ -13,6 +13,10 @@ from enclosure import Enclosure
 
 class Reports:
     def staff_report(self) -> str:
+        """
+        Produce a report of the staff working at the zoo
+        :return:
+        """
         report = "Current staff list\n"
         report += "-" * 35 + "\n"
         for staff_member in Staff.staff_list:
@@ -21,6 +25,10 @@ class Reports:
         return report
 
     def animal_report(self) -> str:
+        """
+        Create a report of the animals at the zoo
+        :return:
+        """
         report = "Current animal list\n"
         report += "-" * 50 + "\n"
         for animal in Animal.animal_list:
@@ -28,6 +36,10 @@ class Reports:
         return report
 
     def enclosure_report(self) -> str:
+        """
+        Create a report of the enclosures at the zoo
+        :return:
+        """
         report = "Current enclosure list\n"
         report += "-" * 50 + "\n"
         for enclosure in Enclosure.enclosure_list:
@@ -35,6 +47,10 @@ class Reports:
         return report
 
     def animal_health_report(self) -> str:
+        """
+        Create a health report of the animals at the zoo
+        :return:
+        """
         report = "Current animal health list\n"
         report += "-" * 65 + "\n"
         for animal in Animal.animal_list:
