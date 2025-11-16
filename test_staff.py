@@ -15,7 +15,7 @@ from enclosure import Enclosure
 @pytest.fixture
 def keeper() -> Zookeeper:
     """
-
+    Fixture for zookeeper
     :return:
     """
     return Zookeeper("Alice")
@@ -23,7 +23,7 @@ def keeper() -> Zookeeper:
 @pytest.fixture
 def vet() -> Veterinarian:
     """
-
+    Fixture for veterinarian
     :return:
     """
     return Veterinarian("Bob")
@@ -31,7 +31,7 @@ def vet() -> Veterinarian:
 @pytest.fixture
 def polly() -> Bird:
     """
-
+    Create an instance of Bird (Polly the Macaw) as a fixture
     :return:
     """
     return Bird("Polly", "Macaw", 2, "Herbivore", "Healthy")
@@ -39,7 +39,7 @@ def polly() -> Bird:
 @pytest.fixture
 def savannah_enclosure() -> Enclosure:
     """
-
+    Fixture for large savannah enclosure
     :return:
     """
     return Enclosure("savannah1", "Large", "Savannah", 10)
@@ -47,15 +47,14 @@ def savannah_enclosure() -> Enclosure:
 @pytest.fixture
 def lion() -> Mammal:
     """
-
+    Create an instance of Mammal (Simba the lion) as a fixture
     :return:
     """
     return Mammal("Simba", "Lion", 6, "Carnivore", "Healthy")
 
-# Check that staff can be correctly instantiated
 def test_staff_initialization(keeper, vet):
     """
-
+    Check that staff can be correctly instantiated
     :param keeper:
     :param vet:
     :return:
@@ -67,10 +66,9 @@ def test_staff_initialization(keeper, vet):
     assert keeper.assigned_animals == []
 
 
-# Test assigning and remove animals from staff
 def test_assign_and_remove_animals(keeper, polly):
     """
-
+    Test assigning and remove animals from staff
     :param keeper:
     :param polly:
     :return:
@@ -81,10 +79,9 @@ def test_assign_and_remove_animals(keeper, polly):
     assert polly not in keeper.assigned_animals
 
 
-# Test that a zookeeper can feed animals
 def test_zookeeper_feed_animal(keeper, polly):
     """
-
+    Test that a zookeeper can feed animals that are assigned to them
     :param keeper:
     :param polly:
     :return:
@@ -94,10 +91,9 @@ def test_zookeeper_feed_animal(keeper, polly):
     assert keeper.feed_animal(polly) == "Polly has been fed."
 
 
-# Test that a zookeeper can clean enclosures
 def test_zookeeper_clean_enclosure(keeper, savannah_enclosure, lion):
     """
-
+    Test that a zookeeper can clean enclosures assigned to them
     :param keeper:
     :param savannah_enclosure:
     :param lion:
@@ -109,10 +105,9 @@ def test_zookeeper_clean_enclosure(keeper, savannah_enclosure, lion):
     assert keeper.clean_enclosure(savannah_enclosure) == "Enclosure cleaned."
 
 
-# Check that a veterinarian can conduct health checks
 def test_veterinarian_health_check(vet, polly):
     """
-
+    Check that a veterinarian can conduct health checks assigned to them
     :param vet:
     :param polly:
     :return:
@@ -122,10 +117,9 @@ def test_veterinarian_health_check(vet, polly):
     assert vet.conduct_health_check(polly) == "Health check performed on Polly. Polly Macaw is Healthy."
 
 
-# Test string representation
 def test_staff_str_representation(keeper, vet):
     """
-
+    Check the output of the string representation for a zookeeper
     :param keeper:
     :param vet:
     :return:
