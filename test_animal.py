@@ -14,7 +14,7 @@ from animal import Bird, Mammal, Reptile
 @pytest.fixture
 def flamingo() -> Bird:
     """
-
+    Create an instance of Bird (flamingo) as a fixture
     :return:
     """
     return Bird("Fiona", "Flamingo", 3, "Herbivore", "Healthy")
@@ -23,7 +23,7 @@ def flamingo() -> Bird:
 @pytest.fixture
 def lion() -> Mammal:
     """
-
+    Create an instance of Mammal (lion) as a fixture
     :return:
     """
     return Mammal("Simba", "Lion", 6, "Carnivore", "Healthy")
@@ -32,16 +32,15 @@ def lion() -> Mammal:
 @pytest.fixture
 def cobra() -> Reptile:
     """
-
+    Create an instance of Reptile (cobra) as a fixture
     :return:
     """
     return Reptile("Kaa", "King Cobra", 3, "Omnivore", "Healthy")
 
 
-# Check that birds can be correctly instantiated
 def test_valid_bird_initialization(flamingo):
     """
-
+    Check that birds can be correctly instantiated
     :param flamingo:
     :return:
     """
@@ -56,7 +55,7 @@ def test_valid_bird_initialization(flamingo):
 # Check that mammals can be correctly instantiated
 def test_valid_mammal_initialization(lion):
     """
-
+    Check that mammals can be correctly instantiated
     :param lion:
     :return:
     """
@@ -71,7 +70,7 @@ def test_valid_mammal_initialization(lion):
 # Check that reptiles can be correctly instantiated
 def test_valid_reptile_initialization(cobra):
     """
-
+    Check that reptiles can be correctly instantiated
     :param cobra:
     :return:
     """
@@ -83,69 +82,76 @@ def test_valid_reptile_initialization(cobra):
     assert not cobra.sleeping
 
 
-# Check for invalid name data types
 def test_invalid_name_type_raises():
     """
-
+    Check that invalid name types raise a error
     :return:
     """
     with pytest.raises(TypeError):
         Bird(123, "Flamingo", 3, "Herbivore", "Healthy")
+    with pytest.raises(TypeError):
         Mammal(45.6, "Lion", 6, "Carnivore", "Healthy")
+    with pytest.raises(TypeError):
         Reptile(["Kaa"], "King Cobra", 3, "Omnivore", "Healthy")
 
 
 def test_invalid_name_value_raises():
     """
-
+    Check that names containing invalid characters (not [A-Z][a-z]) raise a error
     :return:
     """
     with pytest.raises(ValueError):
         Bird("Fiona!", "Flamingo", 3, "Herbivore", "Healthy")
+    with pytest.raises(ValueError):
         Mammal("Simba_1", "Lion", 6, "Carnivore", "Healthy")
+    with pytest.raises(ValueError):
         Reptile("Kaa_snake", "King Cobra", 3, "Omnivore", "Healthy")
 
 
-# Check for invalid species data types
 def test_invalid_species_raises():
     """
-
+    Check that invalid species types raise ann appropriate error
     :return:
     """
     with pytest.raises(ValueError):
         Bird("Fiona", 45.7, 3, "Herbivore", "Healthy")
+    with pytest.raises(TypeError):
         Mammal("Simba", {"Lion"}, 6, "Carnivore", "Healthy")
+    with pytest.raises(ValueError):
         Reptile("Kaa", 123, 3, "Omnivore", "Healthy")
 
 
-# Check for invalid ages
 def test_invalid_age_raises():
     """
-
+    Check that invalid age types raise ann appropriate error
     :return:
     """
     with pytest.raises(ValueError):
         Bird("Fiona", "Flamingo", -3, "Herbivore", "Healthy")
+    with pytest.raises(TypeError):
         Mammal("Simba", "Lion", 6.9, "Carnivore", "Healthy")
+    with pytest.raises(TypeError):
         Reptile("Kaa", "King Cobra", "five", "Omnivore", "Healthy")
 
 
 # Check for invalid diets
 def test_invalid_diet_raises():
     """
-
+    Check that an invalid diet raises an appropriate error
     :return:
     """
     with pytest.raises(TypeError):
         Bird("Fiona", "Flamingo", 3, 45.2, "Healthy")
+    with pytest.raises(TypeError):
         Mammal("Simba", "Lion", 6, 3, "Healthy")
+    with pytest.raises(TypeError):
         Reptile("Kaa", "King Cobra", 3, ["Herbivore", "Carnivore"], "Healthy")
 
 
 # Test Sleep and Awake
 def test_sleep_and_awake(lion):
     """
-
+    Test the ability to mark an animal as sleeping or awake
     :param lion:
     :return:
     """
@@ -159,7 +165,7 @@ def test_sleep_and_awake(lion):
 # Test feeding behavior
 def test_eat_behavior(cobra):
     """
-
+    Test the ability to feed the animals only when appropriate
     :param cobra:
     :return:
     """
@@ -172,7 +178,7 @@ def test_eat_behavior(cobra):
 # Test sounds
 def test_make_sound_bird(flamingo):
     """
-
+    Check the ability for birds to make sounds
     :param flamingo:
     :return:
     """
@@ -181,7 +187,7 @@ def test_make_sound_bird(flamingo):
 
 def test_make_sound_mammal(lion):
     """
-
+    Check the ability for mammals to make sounds.
     :param lion:
     :return:
     """
@@ -190,7 +196,7 @@ def test_make_sound_mammal(lion):
 
 def test_make_sound_reptile(cobra):
     """
-
+    XCheck the ability for reptiles to make sounds
     :param cobra:
     :return:
     """
@@ -200,7 +206,7 @@ def test_make_sound_reptile(cobra):
 # Test string representation
 def test_str_representation(flamingo, lion, cobra):
     """
-
+    Check the output of the __str__ method for bird, mammal and reptile
     :param flamingo:
     :param lion:
     :param cobra:
