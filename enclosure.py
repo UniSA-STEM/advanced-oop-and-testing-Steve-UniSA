@@ -11,9 +11,13 @@ from typing import List
 
 
 class Enclosure:
+    # Track the highest enclosure ID
     _last_enclosure_id: int = 0
+    # Track the list of enclosures created for reporting purposes
     enclosure_list: List[Enclosure] = []
+    # List of valid enclosure sizes at this zoo
     ENCLOSURE_SIZE = {"Small", "Medium", "Large"}
+    # List of valid enclosure environments at this zoo
     ENCLOSURE_ENVIRONMENT = {"Savannah", "Rainforest", "Desert", "Aquatic", "Arctic", "Temperate Forest", "Mountain",
                              "Wetlands"}
 
@@ -27,7 +31,7 @@ class Enclosure:
         self.__set_name(name)
         self.__set_size(size)
         self.__set_environment(environment)
-        # Cleanliness is a rating from 1 to 10
+        # Cleanliness is a rating from 1 to 10. 10 is cleanest.
         self.__set_cleanliness(cleanliness)
         self.__suitable_for = []
         self.__animals = []
