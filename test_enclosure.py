@@ -12,7 +12,6 @@ from enclosure import Enclosure
 from animal import Bird, Mammal, Reptile
 
 
-# Check that enclosures can be correctly instantiated
 @pytest.fixture
 def medium_rainforest_enclosure() -> Enclosure:
     """
@@ -99,7 +98,6 @@ def test_valid_enclosure_initialization(medium_rainforest_enclosure):
     assert medium_rainforest_enclosure.animals == []
 
 
-# Check for invalid name data types
 def test_invalid_name_type():
     """
     Test to check that an invalid name (integer) raises a type error. Name 123 is invalid.
@@ -109,7 +107,6 @@ def test_invalid_name_type():
         Enclosure(123, "Small", "Arctic", 5)
 
 
-# Check for invalid size
 def test_invalid_size_value():
     """
     Test to check that an invalid size value raises a value error. Size "Tiny" is invalid.
@@ -119,7 +116,6 @@ def test_invalid_size_value():
         Enclosure("Tiny Tank", "Tiny", "Aquatic", 5)
 
 
-# Check for invalid environment
 def test_invalid_environment_value():
     """
     Test to check that an invalid environment value raises a value error
@@ -129,23 +125,22 @@ def test_invalid_environment_value():
         Enclosure("Unknown Biome", "Small", "Volcano", 5)
 
 
-# Check for invalid cleanliness levels
 def test_invalid_cleanliness():
     """
-
+    Check that invalid cleanliness levels return appropriate errors
     :return:
     """
     with pytest.raises(ValueError):
         Enclosure("Savannah Zone", "Large", "Savannah", -1)
+    with pytest.raises(ValueError):
         Enclosure("Savannah Zone", "Large", "Savannah", 11)
     with pytest.raises(TypeError):
         Enclosure("Savannah Zone", "Large", "Savannah", "Dirty")
 
 
-# Test the clean_enclosure method
 def test_clean_enclosure_sets_cleanliness_to_10(medium_rainforest_enclosure):
     """
-
+    Test the clean_enclosure method
     :param medium_rainforest_enclosure:
     :return:
     """
@@ -153,10 +148,9 @@ def test_clean_enclosure_sets_cleanliness_to_10(medium_rainforest_enclosure):
     assert medium_rainforest_enclosure.cleanliness == 10
 
 
-# Test the enclosure compatibility evaluation method
 def test_is_compatible_true(small_rainforest_enclosure, bird):
     """
-
+    Test the enclosure compatibility evaluation method
     :param small_rainforest_enclosure:
     :param bird:
     :return:
@@ -166,7 +160,8 @@ def test_is_compatible_true(small_rainforest_enclosure, bird):
 
 def test_is_compatible_false_due_to_size(small_rainforest_enclosure, reptile):
     """
-
+    Test that the enclosure compatibility evaluation method will not allow animals
+    into an enclosure that is too small
     :param small_rainforest_enclosure:
     :param reptile:
     :return:
@@ -176,7 +171,8 @@ def test_is_compatible_false_due_to_size(small_rainforest_enclosure, reptile):
 
 def test_is_compatible_false_due_to_environment(arctic_enclosure, bird):
     """
-
+    Test that the enclosure compatibility evaluation method will not allow animals
+    into an enclosure that is the wrong environment
     :param arctic_enclosure:
     :param bird:
     :return:
@@ -184,10 +180,9 @@ def test_is_compatible_false_due_to_environment(arctic_enclosure, bird):
     assert not arctic_enclosure.is_compatible(bird)
 
 
-# Test adding and removing animals from the enclosure
 def test_add_and_remove_animal(arctic_enclosure, penguin):
     """
-
+    Test adding and removing animals from the enclosure
     :param arctic_enclosure:
     :param penguin:
     :return:
@@ -198,10 +193,9 @@ def test_add_and_remove_animal(arctic_enclosure, penguin):
     assert penguin not in arctic_enclosure.animals
 
 
-# Test that adding an incompatible animal to an enclosure fails
 def test_add_incompatible_animal_raises(small_rainforest_enclosure, lion):
     """
-
+    Test that adding an incompatible animal to an enclosure fails
     :param small_rainforest_enclosure:
     :param lion:
     :return:
@@ -210,20 +204,18 @@ def test_add_incompatible_animal_raises(small_rainforest_enclosure, lion):
         small_rainforest_enclosure.add_animal(lion)
 
 
-# Test the enclosure status
 def test_enclosure_status(temperate_forest_enclosure):
     """
-
+    Test the enclosure status returns an appropriate report on the status of the enclosure
     :param temperate_forest_enclosure:
     :return:
     """
     assert temperate_forest_enclosure.status() == "Sloth Sanctuary has a cleanliness score of 4 out of 10."
 
 
-# Test string representation
 def test_enclosure_str(medium_rainforest_enclosure):
     """
-
+    Check the output of the string representation for an enclosure
     :param medium_rainforest_enclosure:
     :return:
     """

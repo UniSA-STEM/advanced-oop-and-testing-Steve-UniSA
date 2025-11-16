@@ -121,7 +121,7 @@ class Enclosure:
         :return:
         """
         if isinstance(cleanliness, int):
-            if cleanliness >= 0 & cleanliness <= 10:
+            if cleanliness >= 0 and cleanliness <= 10:
                 self.__cleanliness = cleanliness
             else:
                 raise ValueError("The cleanliness value must be between 0 and 10.")

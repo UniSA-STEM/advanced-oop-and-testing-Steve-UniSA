@@ -203,10 +203,9 @@ def test_make_sound_reptile(cobra):
     assert cobra.make_sound() == "Kaa hisses."
 
 
-# Test string representation
 def test_str_representation(flamingo, lion, cobra):
     """
-    Check the output of the __str__ method for bird, mammal and reptile
+    Check the output of the string representation for bird, mammal and reptile
     :param flamingo:
     :param lion:
     :param cobra:
